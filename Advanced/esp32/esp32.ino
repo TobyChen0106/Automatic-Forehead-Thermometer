@@ -85,7 +85,7 @@ MFRC522::MIFARE_Key key;
 // ws2812
 CRGB leds[NUM_LEDS];
 
-byte uid[4]; // RFID
+byte uid[4];   // RFID
 char buf[13];  // thermometer rx
 float tmp = 1; // thermometer temperature
 
@@ -98,10 +98,12 @@ int sendToServer()
 	char str[200] = "";
 	char query_buffer[250] = "";
 	// String _qrcode;
-	if (input_flag == 2){
+	if (input_flag == 2)
+	{
 		sprintf(str, "%s,%d,%d", QRCode, (int)(tmp * 10), STATION_ID);
 	}
-	else if (input_flag == 1){
+	else if (input_flag == 1)
+	{
 		uint32_t intArray[4];
 		std::copy(uid, uid + 4, intArray);
 		uint32_t decID = (intArray[3] << 24) + (intArray[2] << 16) + (intArray[1] << 8) + (intArray[0]);
@@ -111,13 +113,9 @@ int sendToServer()
 	{
 		return -1;
 	}
-
 	Serial.println(str);
-	// query_buffer = "";
-	// int convert_tmp = temp*10;
-	// query_buffer = decID << (4*8) | (byte)temp;
+
 	IPAddress foo;
-	// query_buffer = uid
 	unsigned long current_time = millis();
 	sprintf(query_buffer, "c,%s,%d%s", str, current_time, DOMAIN_POSTFIX);
 	if (WiFi.hostByName(query_buffer, foo))
@@ -197,8 +195,8 @@ void setup()
 	{
 		key.keyByte[i] = 0xFF;
 	}
+	
 	// wifi init
-	// lcd.clear();
 	pinMode(PIN_WIFI_MODE, INPUT_PULLUP);
 	bool wifi_mode = digitalRead(PIN_WIFI_MODE);
 	if (wifi_mode)
@@ -227,7 +225,7 @@ void setup()
 		// BACKUP_WIFI
 		char BACKUP_WIFI_NAME[5];
 		char BACKUP_WIFI_PWD[8];
-        // Fill in your backup wifi name and password
+		// Fill in your backup wifi name and password
 		sprintf(BACKUP_WIFI_NAME, "%s", "BACKUP_WIFI_NAME");
 		sprintf(BACKUP_WIFI_PWD, "%08d", "BACKUP_WIFI_PWD");
 		Serial.print("BACKUP_WIFI_NAME: ");
@@ -732,7 +730,9 @@ void BLE_SendQRCode()
 	Serial.print(QRCode);
 
 	int _count;
-	for (_count = 0; QRCode[_count] != '\0'; ++_count){};
+	for (_count = 0; QRCode[_count] != '\0'; ++_count)
+	{
+	};
 
 	if (bleKeyboard.isConnected())
 	{

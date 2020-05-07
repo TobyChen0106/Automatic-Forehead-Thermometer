@@ -20,8 +20,6 @@
   "dependencies": {
     "body-parser": "^1.19.0",
     "express": "^4.17.1",
-    "md5": "^2.2.1",
-    "node-fetch": "^2.6.0",
     "node-named": "0.0.2",
     "winston": "^3.2.1",
     "ws": "^7.2.3"
